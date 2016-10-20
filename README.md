@@ -7,6 +7,7 @@
 * This is sample project
 * Written in Objective-C
 * Targetting for iOS 10+
+* Free to use :)
 It demonstrates a proper usage of geolocation services, especially the regions.
 Region monitoring works even after restart.
 
@@ -18,5 +19,4 @@ Don't forget to change developer team to yours.
 
 ### Who do I talk to? ###
 
-* Free to use :)
 * Owner: Victor Dombrovskiy victor.dombrovskiy@gmail.com

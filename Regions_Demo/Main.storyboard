@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--MainVC-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5t-dI-HOL" userLabel="Container">
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pVq-AJ-EuR">
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="sn6-rc-6ce"/>
+                                        </connections>
+                                    </mapView>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Crosshair" translatesAutoresizingMaskIntoConstraints="NO" id="Nqt-07-H2B">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="64" id="RRB-Id-Jbh"/>
+                                            <constraint firstAttribute="height" constant="64" id="ze0-Ll-XJx"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="pVq-AJ-EuR" firstAttribute="centerX" secondItem="D5t-dI-HOL" secondAttribute="centerX" id="5LH-wH-00d"/>
+                                    <constraint firstItem="pVq-AJ-EuR" firstAttribute="width" secondItem="D5t-dI-HOL" secondAttribute="width" id="A6C-mA-wpG"/>
+                                    <constraint firstItem="Nqt-07-H2B" firstAttribute="centerY" secondItem="D5t-dI-HOL" secondAttribute="centerY" id="Dr2-Hz-PYi"/>
+                                    <constraint firstItem="Nqt-07-H2B" firstAttribute="centerX" secondItem="D5t-dI-HOL" secondAttribute="centerX" id="Ibm-ew-2Fz"/>
+                                    <constraint firstItem="pVq-AJ-EuR" firstAttribute="height" secondItem="D5t-dI-HOL" secondAttribute="height" id="LRr-yK-88U"/>
+                                    <constraint firstItem="pVq-AJ-EuR" firstAttribute="centerY" secondItem="D5t-dI-HOL" secondAttribute="centerY" id="RXt-Fz-50x"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZH-Zy-Ucu">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xPW-OG-AnB"/>
+                                </constraints>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <navigationItem title="Title" id="0LN-YI-AmI">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="hPt-Gg-hWb">
+                                            <connections>
+                                                <action selector="lefBarButtonAction:" destination="BYZ-38-t0r" id="ORC-Ad-bbi"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="fao-cM-lld">
+                                            <connections>
+                                                <action selector="rightBarButtonAction:" destination="BYZ-38-t0r" id="yhC-TF-foX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="NZH-Zy-Ucu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="394-Yt-6ve"/>
+                            <constraint firstItem="D5t-dI-HOL" firstAttribute="top" secondItem="NZH-Zy-Ucu" secondAttribute="bottom" id="DbK-hM-XYe"/>
+                            <constraint firstItem="NZH-Zy-Ucu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="20" id="QRQ-he-qJM"/>
+                            <constraint firstAttribute="trailing" secondItem="NZH-Zy-Ucu" secondAttribute="trailing" id="TRM-NV-bad"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D5t-dI-HOL" secondAttribute="bottom" id="cdz-2j-Bwz"/>
+                            <constraint firstItem="D5t-dI-HOL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dR7-73-rat"/>
+                            <constraint firstAttribute="trailing" secondItem="D5t-dI-HOL" secondAttribute="trailing" id="q8z-dx-d82"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="pVq-AJ-EuR" id="ci5-ah-RI2"/>
+                        <outlet property="navigationItem" destination="0LN-YI-AmI" id="69t-1Z-dkJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="122.78860569715144"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Crosshair" width="28" height="28"/>
+    </resources>
+</document>

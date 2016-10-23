@@ -29,6 +29,8 @@ static NSString* const kLocationMonitoringDidFailForRegion = @"kLocationMonitori
 
 /// Location, The last location received. Will be nil until a location has been received
 - (CLLocation *)currentLocation;
+- (void)startStandardLocationService;
+- (void)startSignificantLocationMonitoring;
 
 /// Regions
 - (void)startMonitoringRegion:(CLRegion *)region;

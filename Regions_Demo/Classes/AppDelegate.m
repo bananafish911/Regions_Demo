@@ -20,18 +20,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // location manager init
-    [LocationManager shared];
+    LocationManager *manager = [LocationManager shared];
+    [manager requestLocationServicesAuthoriation];
+    
+    UIApplicationState applicationState = [UIApplication sharedApplication].applicationState;
+    if (applicationState == UIApplicationStateActive) {
+        [manager startStandardLocationService];
+    } else {
+        [manager startSignificantLocationMonitoring];
+    }
     
     // notifications
     [self configureUNUserNotificationCenter];
-    [self startMonitoringRegions];
+    [self startMonitoringRegionsNotifications];
     
     return YES;
 }
 
 #pragma mark - Regions monitoring
 
-- (void)startMonitoringRegions {
+- (void)startMonitoringRegionsNotifications {
     // region Entered
     [[NSNotificationCenter defaultCenter] addObserverForName:kLocationEnteredRegion
                                                       object:nil

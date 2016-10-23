@@ -36,7 +36,7 @@
     self.manager = [[CLLocationManager alloc] init];
     // Configure the location manager.
     self.manager.delegate = self;
-    self.manager.distanceFilter = kCLLocationAccuracyHundredMeters;
+    self.manager.distanceFilter = kCLLocationAccuracyNearestTenMeters;
     self.manager.desiredAccuracy = kCLLocationAccuracyBest;
     
     [self requestLocationServicesAuthoriation];
@@ -45,10 +45,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive:)
                                                  name:UIApplicationWillResignActiveNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(applicationDidEnterBackground:)
-                                                 name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillEnterForeground:)
@@ -65,31 +61,13 @@
 
 /// for events like: incoming call, open another app, etc.
 - (void)applicationWillResignActive:(NSNotification *)notification {
-    //
-    //app was interrupted
     //stopping the location service (save battery), starting significant location changes service (try)
-    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
-        [self.manager stopUpdatingLocation];
-        [self.manager startMonitoringSignificantLocationChanges];
-    } else {
-        DLog(@"ERR: [CLLocationManager significantLocationChangeMonitoringAvailable] is false");
-    }
-}
-
-- (void)applicationDidEnterBackground:(NSNotification *)notification {
-    //
+    [self startSignificantLocationMonitoring];
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
     //stopping the significant location changes service and starting the standard location service
-    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
-        [self.manager stopMonitoringSignificantLocationChanges];
-        [self.manager startUpdatingLocation];
-    }
-    else {
-        DLog(@"ERR: [CLLocationManager significantLocationChangeMonitoringAvailable] is false");
-    }
-
+    [self startStandardLocationService];
 }
 
 - (void)postNotificationWithName:(NSString *)name object:(id)object {
@@ -104,7 +82,7 @@
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorizedAlways) {
         // Start the standard location service.
-        [self.manager startUpdatingLocation];
+        [self startStandardLocationService];
     }
 }
 
@@ -151,9 +129,6 @@
     } else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
         // If authorization has been denied previously, inform the user.
         NSLog(@"%s: location services authorization was previously denied by the user.", __PRETTY_FUNCTION__);
-    } else { // We do have authorization.
-        // Start the standard location service.
-        [self.manager startUpdatingLocation];
     }
 }
 
@@ -161,6 +136,27 @@
 
 - (CLLocation *)currentLocation {
     return self.manager.location;
+}
+
+- (void)startStandardLocationService {
+    //stopping the significant location changes service and starting the standard location service
+    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+        [self.manager stopMonitoringSignificantLocationChanges];
+        [self.manager startUpdatingLocation];
+    }
+    else {
+        DLog(@"ERR: [CLLocationManager significantLocationChangeMonitoringAvailable] is false");
+    }
+}
+
+- (void)startSignificantLocationMonitoring {
+    //stopping the location service (save battery), starting significant location changes service (try)
+    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+        [self.manager stopUpdatingLocation];
+        [self.manager startMonitoringSignificantLocationChanges];
+    } else {
+        DLog(@"ERR: [CLLocationManager significantLocationChangeMonitoringAvailable] is false");
+    }
 }
 
 #pragma mark - Regions

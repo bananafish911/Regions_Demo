@@ -51,8 +51,8 @@
                                                           DLog(@"%@", event);
                                                           
                                                           // Zoom to the current user location.
-                                                          MKCoordinateRegion userLocation = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000.0, 1000.0);
-                                                          [weakSelf.mapView setRegion:userLocation animated:YES];
+//                                                          MKCoordinateRegion userLocation = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000.0, 1000.0);
+//                                                          [weakSelf.mapView setRegion:userLocation animated:YES];
                                                       }
     }];
     
@@ -102,6 +102,8 @@
     [super viewDidAppear:animated];
     // ask for permission again
     [[LocationManager shared] requestLocationServicesAuthoriation];
+    // Start monitoring
+    [[LocationManager shared] startStandardLocationService];
     
     // Set the map's user tracking mode.
     self.mapView.userTrackingMode = MKUserTrackingModeNone;

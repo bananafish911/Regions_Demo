@@ -9,6 +9,7 @@
 * Free to use :)
 * It demonstrates a proper usage of geolocation services, especially the regions.
 * Region monitoring works even after restart.
+* iOS allows monitor up to 20 regions per app
 
 ### Run:
 * Don't forget to change developer team to yours.

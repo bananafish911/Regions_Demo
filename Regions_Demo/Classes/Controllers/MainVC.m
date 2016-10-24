@@ -49,10 +49,6 @@
                                                           CLLocation *location = [notification object];
                                                           NSString *event = [NSString stringWithFormat:@"kLocationDidUpdateLocation %@ at %@", location.description, [NSDate date]];
                                                           DLog(@"%@", event);
-                                                          
-                                                          // Zoom to the current user location.
-//                                                          MKCoordinateRegion userLocation = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000.0, 1000.0);
-//                                                          [weakSelf.mapView setRegion:userLocation animated:YES];
                                                       }
     }];
     
